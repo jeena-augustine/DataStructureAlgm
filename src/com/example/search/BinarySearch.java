@@ -2,32 +2,33 @@ package com.example.search;
 
 public class BinarySearch {
 
-	public static void main(String[] args) {
-
-		int[] arr = { 1, 45, 56, 12, 23 };
-		int val = 45;
-
-		int sc = search(arr, 0, arr.length - 1, val);
-		if (sc == -1)
-			System.out.println("value not available");
-		else
-			System.out.println("value available at" + sc);
-
-	}
-
-	private static int search(int[] arr, int big, int end, int item) {
-		int mid;
+	int binarySearch(int arr[], int big, int end, int item) {
 		if (end >= big) {
-			mid = big + end - 1 / 2;
+			int mid = big + (end - big) / 2;
+
 			if (arr[mid] == item)
 				return mid;
-			else if (arr[mid] < item)
-				return search(arr, mid + 1, end, item);
-			else
-				return search(arr, big, mid - 1, item);
 
+			if (arr[mid] > item)
+				return binarySearch(arr, big, mid - 1, item);
+
+			return binarySearch(arr, mid + 1, end, item);
 		}
+
+	
 		return -1;
+	}
+
+	public static void main(String args[]) {
+		BinarySearch ob = new BinarySearch();
+		int arr[] = { 2, 3, 4, 10, 40 };
+		int n = arr.length;
+		int x = 40;
+		int result = ob.binarySearch(arr, 0, n - 1, x);
+		if (result == -1)
+			System.out.println("Element not present");
+		else
+			System.out.println("Element found at index " + result);
 	}
 
 }
